@@ -5,5 +5,5 @@ BOT_NAME = 'scraper'
 SPIDER_MODULES = ['scraper.spiders']
 NEWSPIDER_MODULE = 'scraper.spiders'
 
-ROBOTSTXT_OBEY = False
+ROBOTSTXT_OBEY = True
 HTTPCACHE_ENABLED = True
