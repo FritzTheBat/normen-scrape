@@ -1,6 +1,6 @@
 import scrapy, re 
 
-class BlogSpider(scrapy.Spider):
+class NormSpider(scrapy.Spider):
     name = 'GesetzblattBayern'
     start_urls = ['https://www.verkuendung-bayern.de/gvbl/?offset=0']
 

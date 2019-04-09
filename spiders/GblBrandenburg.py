@@ -1,6 +1,6 @@
 import scrapy, re 
 
-class BlogSpider(scrapy.Spider):
+class NormSpider(scrapy.Spider):
     name = 'GesetzblattBrandenburg'
     start_urls = ['http://bravors.brandenburg.de/de/veroeffentlichungsblaetter_chronologisch/2019']
 
@@ -15,4 +15,4 @@ class BlogSpider(scrapy.Spider):
 
         nextUrl = re.sub("chronologisch/(\d+)",lambda m: "chronologisch/"+str(int(m.group(1))+-1),response.request.url)
         request = scrapy.Request(url=nextUrl)
-        yield request
+        yield requestitem.css("::attr(href)").get()

@@ -1,6 +1,6 @@
 import scrapy, re 
 
-class BlogSpider(scrapy.Spider):
+class NormSpider(scrapy.Spider):
     name = 'MinisterialblattBayern'
     start_urls = ['https://www.verkuendung-bayern.de/amtsblatt/ausgabe/allmbl-2019-1/']
 
