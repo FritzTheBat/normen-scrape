@@ -12,7 +12,7 @@ class NormSpider(scrapy.Spider):
 
     start_urls = ['http://starweb.hessen.de']
 
-  c  def parse(self, response):
+    def parse(self, response):
 
         for i in range(1,300):
 
