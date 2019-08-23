@@ -17,6 +17,10 @@ class NormSpider(scrapy.Spider):
                     'Seiten': re.sub("^\d{4} ","",item.css("td:nth-child(1) ::text").get().strip())+" ff.",
                 }
 
-        nextUrl = re.sub("offset=(\d+)",lambda m: "offset="+str(int(m.group(1))+16),response.request.url)
-        request = scrapy.Request(url=nextUrl)
-        yield request
+
+        m = re.search("offset=(\d+)",response.request.url)
+        if m and int(m.group(1)) < 5 * 16:
+
+            nextUrl = re.sub("offset=(\d+)",lambda m: "offset="+str(int(m.group(1))+16),response.request.url)
+            request = scrapy.Request(url=nextUrl)
+            yield request

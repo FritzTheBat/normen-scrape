@@ -2,3 +2,4 @@ test/
 scraper/spiders/__pycache__/
 project.egg-info/
 build/
+satJobs.yml

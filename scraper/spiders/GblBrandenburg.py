@@ -1,11 +1,15 @@
 import scrapy, re 
-
+import datetime
+now = datetime.datetime.now()
 class NormSpider(scrapy.Spider):
     name = 'GesetzblattBrandenburg'
-    start_urls = ['http://bravors.brandenburg.de/de/veroeffentlichungsblaetter_chronologisch/2019']
+    year = str(now.year)
+    start_urls = ['http://bravors.brandenburg.de/de/veroeffentlichungsblaetter_chronologisch/'+year]
 
     def parse(self, response):
-        for item in response.xpath("descendant-or-self::a[@href and contains(@href, 'GVBl') and not(contains(@href, '-Anlage'))]"): #.css("a[href*=GVBl]")
+        resList = list(response.xpath("descendant-or-self::a[@href and contains(@href, 'GVBl') and not(contains(@href, '-Anlage'))]"))
+        resList.reverse()
+        for item in resList: #.css("a[href*=GVBl]")
             yield {
                 'ID': re.sub(" \([^\)]+KB\)","",item.attrib.get('title')).replace("Gesetz- und Verordnungsblatt ",""), 
                 # 'Titel': item.css("td:nth-child(3) ::text").get().strip(),
@@ -13,6 +17,6 @@ class NormSpider(scrapy.Spider):
                 # 'Datum': item.css("td:nth-child(2) ::text").get().strip(),
             }
 
-        nextUrl = re.sub("chronologisch/(\d+)",lambda m: "chronologisch/"+str(int(m.group(1))+-1),response.request.url)
-        request = scrapy.Request(url=nextUrl)
-        yield requestitem.css("::attr(href)").get()
+        # nextUrl = re.sub("chronologisch/(\d+)",lambda m: "chronologisch/"+str(int(m.group(1))+-1),response.request.url)
+        # request = scrapy.Request(url=nextUrl)
+        # yield request

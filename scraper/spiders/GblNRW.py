@@ -9,10 +9,11 @@ class NormSpider(scrapy.Spider):
         #single issue
         for item in response.css('#main1 .standard tr'):
             href = response.urljoin(item.css('td:nth-child(4) a::attr(href)').get()) # 
-            if "detail_text" in href:
+            id = item.css("td:nth-child(1)::text").get()
+            if "detail_text" in href and id:
                 yield {
-                    'ID': item.css("td:nth-child(1)::text").get(),
-                    'Titel': item.css("td:nth-child(4)::text").get(),
+                    'ID': id,
+                    'Titel': item.css("td:nth-child(4) a::text").get().strip(),
                     'Link': href,
                     'Datum': item.css("td:nth-child(2)::text").get(),
                     "Seiten": item.css("td:nth-child(5)::text").get()

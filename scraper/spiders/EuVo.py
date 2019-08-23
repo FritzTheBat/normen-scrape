@@ -15,10 +15,12 @@ class NormSpider(scrapy.Spider):
             yield {
                 'ID': "EU VO "+item.css("h2").re_first('\d{4}\/\d+'),
             	'Titel': item.css('h2 ::text').get(),
-            	'Link': response.urljoin(item.css('h2 a::attr(href)').get()).replace("/AUTO/","/DE/TXT/"),
+            	'Link': re.sub(r"&qid=\d+|&rid=\d+","",response.urljoin(item.css('h2 a::attr(href)').get()).replace("/AUTO/","/DE/TXT/")),
                 'Datum': re.sub("\/",".",item.re_first(r'\d{2}\/\d{2}\/\d{4}'))
             }
 
-        nextUrl = re.sub("page=(\d+)",lambda m: "page="+str(int(m.group(1))+1),response.request.url)
-        request = scrapy.Request(url=nextUrl,)
-        yield request
+        m = re.search("page=(\d+)",response.request.url)
+        if m and int(m.group(1)) < 5:
+            nextUrl = re.sub("page=(\d+)",lambda m: "page="+str(int(m.group(1))+1),response.request.url)
+            request = scrapy.Request(url=nextUrl)
+            yield request
