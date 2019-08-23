@@ -10,7 +10,7 @@ class NormSpider(scrapy.Spider):
     def parse(self, response):
 
         #issue list
-        for item in response.xpath("//a[contains(.,'Ausgabe') and contains(.,'.2019')]"):
+        for item in response.xpath("//a[contains(.,'Ausgabe') and contains(.,'."+year+"')]"):
             href = response.urljoin(item.css('a::attr(href)').get())
             yield {
                 'ID': re.search("(\d+)",item.css("::text").get()).group(1),
