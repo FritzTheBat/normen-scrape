@@ -25,7 +25,7 @@ class NormSpider(scrapy.Spider):
 
 
                    yield {
-                    'ID': i,
+                    'ID': str(i),
                     'Link': url
                     }
 
