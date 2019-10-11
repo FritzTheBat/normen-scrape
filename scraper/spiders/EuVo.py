@@ -4,7 +4,11 @@ from scrapy.http import Request
 class NormSpider(scrapy.Spider):
     name = 'EUVerordnungen'
     # start_urls = ['https://eur-lex.europa.eu/search.html?page=1&DB_TYPE_OF_ACT=regulation&CASE_LAW_SUMMARY=false&DTS_DOM=ALL&typeOfActStatus=REGULATION&type=advanced&lang=de&SUBDOM_INIT=ALL_ALL&DTS_SUBDOM=ALL_ALL']
-    start_urls = ["https://eur-lex.europa.eu/search.html?VV=true&DB_TYPE_OF_ACT=allRegulation&DTS_DOM=EU_LAW&typeOfActStatus=ALL_REGULATION&type=advanced&lang=de&SUBDOM_INIT=LEGISLATION&DTS_SUBDOM=LEGISLATION&page=1&sortOne=DD&sortOneOrder=desc&sortOneOrder=desc"]
+    start_urls = [ 
+                    #Verordnungen:
+                    "https://eur-lex.europa.eu/search.html?VV=true&DB_TYPE_OF_ACT=allRegulation&DTS_DOM=EU_LAW&typeOfActStatus=ALL_REGULATION&type=advanced&lang=de&SUBDOM_INIT=LEGISLATION&DTS_SUBDOM=LEGISLATION&page=1&sortOne=DD&sortOneOrder=desc&sortOneOrder=desc",
+                    # Beschlüsse:
+                    "https://eur-lex.europa.eu/search.html?CASE_LAW_JURE_SUMMARY=false&lang=en&SUBDOM_INIT=ALL_ALL&DTS_DOM=ALL&CASE_LAW_SUMMARY=false&type=advanced&DTS_SUBDOM=ALL_ALL&typeOfActStatus=DECISION&qid=1570802773119&DB_TYPE_OF_ACT=decision&sortOne=DD&sortOneOrder=desc&sortOneOrder=desc"]
 
     def start_requests(self):
         for url in self.start_urls:
