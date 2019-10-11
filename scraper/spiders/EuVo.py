@@ -20,7 +20,7 @@ class NormSpider(scrapy.Spider):
             }
 
         m = re.search("page=(\d+)",response.request.url)
-        if m and int(m.group(1)) < 25:
+        if m and int(m.group(1)) < 40:
             nextUrl = re.sub("page=(\d+)",lambda m: "page="+str(int(m.group(1))+1),response.request.url)
             request = scrapy.Request(url=nextUrl)
             yield request
