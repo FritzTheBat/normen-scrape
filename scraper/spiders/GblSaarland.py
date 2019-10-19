@@ -5,9 +5,9 @@ import urllib3
 http = urllib3.PoolManager()
 
 class NormSpider(scrapy.Spider):
-    name = 'GesetzblattBW'
+    name = 'GesetzblattSaarland'
     year = str(now.year)
-    start_urls = ['https://www.landtag-bw.de/files/live/sites/LTBW/files/dokumente/gesetzblaetter/'+year+'/GBl'+year+'01.pdf']
+    start_urls = ['http://www.amtsblatt.saarland.de/jportal/docs/news_anlage/sl/pdf/VerkBl/ABl/ads_39-2019_teil_I_signed.pdf'+year+'/GBl'+year+'01.pdf']
 
     def parse(self, response):
         
