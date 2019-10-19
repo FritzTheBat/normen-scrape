@@ -3,7 +3,7 @@ from scrapy.http import FormRequest
 
 class NormSpider(scrapy.Spider):
     name = 'GesetzblattMeckPomm'
-    start_urls = ["http://www.dokumentation.landtag-mv.de/parldok/formalkriterien/1"]
+    start_urls = ["http://www.dokumentation.landtag-mv.de/parldok/formalkriterien"]
 
     def parse(self, response):
         # print(response.body)
