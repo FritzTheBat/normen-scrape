@@ -11,11 +11,11 @@ class NormSpider(scrapy.Spider):
     def parse(self, response):
 
         #single issue
-        for item in response.css(".lr-product-description>a"):
+        for item in response.css(".lr-product-description"):
             yield {
                 'ID': item.re_first("\d{2}/20\d{2,}"),
                 'Titel': item.css("h2::text").get(), 
-                'Link': response.urljoin(item.css("::attr(href)").get()), # a ::href
+                'Link': response.urljoin(item.css("u>a::attr(href)").get()), # a ::href
                 # 'Datum': re.search("Vollzitat:.{5,300}?(\d+\..{2,40}?\d{4})",response.body_as_unicode()).group(1).replace("&nbsp;"," "),
                 # "Seiten": re.search(r"\(.{2,40}?(S\..*?)\)",response.body_as_unicode()).group(1).replace("&nbsp;"," ")
             }
